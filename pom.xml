@@ -8,5 +8,66 @@
     <artifactId>example</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.igumnov</groupId>
+            <artifactId>common</artifactId>
+            <version>3.3</version>
+        </dependency>
 
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.187</version>
+        </dependency>
+    </dependencies>
+    <build>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <archive>
+                        <index>true</index>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>com.igumnov.common.example.App</mainClass>
+                        </manifest>
+                        <manifestEntries>
+                            <mode>development</mode>
+                            <key>value</key>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.4.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <mainClass>com.igumnov.common.example.App</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+
+    </build>
 </project>
