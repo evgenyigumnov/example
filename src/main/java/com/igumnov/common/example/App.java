@@ -27,6 +27,9 @@ public class App {
             return "login";
         });
 
+        WebServer.addStaticContentHandler("/sql", "sql");
+        WebServer.addClassPathHandler("/static", "/META-INF/resources/webjars/");
+
 
 
         WebServer.start();
