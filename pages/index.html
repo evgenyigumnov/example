@@ -1,1 +1,43 @@
-<span th:text="${time}"></span>
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<body>
+<div layout:fragment="content">
+    <script src="/js/user.js"></script>
+    <h1 th:text="${time}"></h1>
+
+    <div ng-controller="UserCtrl">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Password</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="user in users">
+                <td>{{user.userName}}</td>
+                <td>{{user.userPassword}}</td>
+                <td><a href="#"><span class="glyphicon glyphicon-remove" tooltip="Delete" ng-click="deleteUser(user)"/></a></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div ng-model="user">
+            <div class="form-group">
+                <input type="text" class="form-control" ng-model="user.userName" placeholder="Login"/>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" ng-model="user.userPassword" placeholder="Password"/>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary" ng-click="addUser(user)">Add</button>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+</body>
+</html>
