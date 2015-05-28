@@ -2,10 +2,8 @@ package com.igumnov.common.example;
 
 import com.igumnov.common.ORM;
 import com.igumnov.common.WebServer;
-import com.igumnov.common.reflection.ReflectionException;
 import com.igumnov.common.webserver.WebServerException;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -13,7 +11,7 @@ public class App {
 
     public static void main(String[] args) throws Exception {
 
-        ORM.connectionPool("org.h2.Driver", "jdbc:h2:mem:test", "SA", "", 10, 30);
+        ORM.connectionPool("org.h2.Driver", "jdbc:h2:mem:test", "SA", "", 1, 3);
         ORM.applyDDL("sql");
         WebServer.init("localhost", 8181);
 
