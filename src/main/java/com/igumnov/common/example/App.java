@@ -33,20 +33,6 @@ public class App {
         });
 
 
-        WebServer.addRestController("/rest/user/find", (request) -> {
-            if (request.getMethod().equals(WebServer.METHOD_GET)) {
-                ArrayList<Object> users;
-                try {
-                    users = ORM.findAll(ExampleUser.class);
-                } catch (Exception e) {
-                    throw new WebServerException(e.getMessage());
-                }
-                return users;
-            } else {
-                throw new WebServerException("Unsupported method");
-            }
-        });
-
 
         WebServer.addRestController("/rest/user", ExampleUser.class, (request, postObj) -> {
             switch (request.getMethod()) {
