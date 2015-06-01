@@ -2,8 +2,10 @@ package com.igumnov.common.example;
 
 import com.igumnov.common.ORM;
 import com.igumnov.common.WebServer;
+import com.igumnov.common.reflection.ReflectionException;
 import com.igumnov.common.webserver.WebServerException;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -13,6 +15,7 @@ public class App {
 
         ORM.connectionPool("org.h2.Driver", "jdbc:h2:mem:test", "SA", "", 1, 3);
         ORM.applyDDL("sql");
+        WebServer.setPoolSize(5,10);
         WebServer.init("localhost", 8181);
 
         WebServer.security("/login", "/login", "/logout");
@@ -29,6 +32,17 @@ public class App {
             return "index";
         });
         WebServer.addController("/login", (request, model) -> {
+            try {
+                ORM.findAll(ExampleUser.class);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (ReflectionException e) {
+                e.printStackTrace();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
             return "login";
         });
 
