@@ -8,6 +8,7 @@ import com.igumnov.common.webserver.WebServerException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Enumeration;
 
 public class App {
 
@@ -18,7 +19,7 @@ public class App {
         WebServer.setPoolSize(5,10);
         WebServer.init("localhost", 8181);
 
-        WebServer.security("/login", "/login", "/logout");
+        WebServer.security("/login", "/login?error=1", "/logout");
         WebServer.addRestrictRule("/*", new String[]{"user_role"});
         WebServer.addAllowRule("/static/*");
         WebServer.addClassPathHandler("/static", "META-INF/resources/webjars");
@@ -32,17 +33,7 @@ public class App {
             return "index";
         });
         WebServer.addController("/login", (request, model) -> {
-            try {
-                ORM.findAll(ExampleUser.class);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } catch (ReflectionException e) {
-                e.printStackTrace();
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
+
             return "login";
         });
 
